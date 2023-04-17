@@ -10,6 +10,7 @@ import puj.api.tool.toolapi.entity.Tool;
 
 public interface ToolRepository extends  JpaRepository<Tool,Integer>{
 
+
     /**
      * @param brandId
      * @return
