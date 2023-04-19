@@ -9,6 +9,10 @@ import org.springframework.stereotype.Service;
 import puj.api.tool.toolapi.entity.Tool;
 import puj.api.tool.toolapi.repository.ToolRepository;
 
+/**
+ * Clase que implementa la interfaz para el crud de herramientas
+ * @implements interfaz que define los metodos de listar, eliminar, modificar etc
+ */
 @Service
 public class ToolServiceImp implements ToolService{
     /**
@@ -53,6 +57,12 @@ public class ToolServiceImp implements ToolService{
         return tool;
     }
 
+    
+    /** 
+     * Metodo para crear una herramienta a traves del repositorio jpa toolRepository
+     * @param tool
+     * @return Retorna un objeto de tipo herramienta ya mapeado
+     */
     @Override
     public Tool createTool(Tool tool) {
         Tool newtool = new Tool();
@@ -67,13 +77,27 @@ public class ToolServiceImp implements ToolService{
         return newtool;
     }
 
+
+    
+    /** 
+     * Metodo que elimina una herramienta segun el id que se le pase por parametro
+     * @param id id de la herramienta
+     * @return True si se elimino, falso si no
+     */
     @Override
-    public String delete(Integer id) {
+    public Boolean delete(Integer id) {
         Tool tool = toolRepository.findById(id).get();
         toolRepository.delete(tool);
-        return "deleted";
+        return true;
     }
 
+
+    
+    /** 
+     * Metodo para modificar una herramienta, ya viene la herramienta
+     * @param tool Herramienta a modificar
+     * @return Retorna la herramienta ya modificada
+     */
     @Override
     public Tool modifyTool(Tool tool) {
         Tool newtool = new Tool();
@@ -88,15 +112,19 @@ public class ToolServiceImp implements ToolService{
         return newtool;
     }
 
+
+    
+    /** 
+     * Metodo para traer una lista de herramientas segun una marca en especifico
+     * @param brand_id id de la marca a filtrar
+     * @return Retorna una lista de herramientas segun una marca
+     */
     @Override
     public List<Tool> findByBrand(Integer brand_id) {
     List<Tool> tools = new ArrayList<Tool>();
     tools = toolRepository.findByBrand(brand_id);
     return tools;    
     }
-
-
-    
     
 
 }

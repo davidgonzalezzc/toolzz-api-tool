@@ -6,6 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import puj.api.tool.toolapi.entity.Tool;
 
+/**
+ * Interfaz repositorio para interactuar con la base de datos
+ */
 public interface ToolRepository extends  JpaRepository<Tool,Integer>{
 
     public List<Tool> findByBrand(Integer brand_id);
