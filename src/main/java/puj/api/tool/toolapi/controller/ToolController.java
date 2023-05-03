@@ -5,11 +5,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +26,7 @@ import puj.api.tool.toolapi.service.ToolService;
  */
 @RestController
 @RequestMapping("/tools")
-@CrossOrigin(origins={"http://localhost:4200","http://localhost:8089"})
+//@CrossOrigin(origins="http://localhost:4200")
 @Slf4j
 public class ToolController {
     
@@ -36,6 +38,7 @@ public class ToolController {
      * @return Retorna una lista de herramientas
      */
     @GetMapping("/tool")
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<Tool> listTools(){
         log.info(toolService.listTools().toString());
         return toolService.listTools();
@@ -56,6 +59,9 @@ public class ToolController {
      * @param id parametro de id de la herramienta
      * @return Retorna una herramienta segun el id proporcionado
      */
+
+
+
     @GetMapping("/tool/byid/{id}")
     public Tool findToolById(@PathVariable Integer id){
         return toolService.findToolById(id);
@@ -67,7 +73,7 @@ public class ToolController {
      * @return Retorna la herramienta creada
      */
     @PostMapping("/tool")
-    public Tool createTool(Tool tool){
+    public Tool createTool(@RequestBody Tool tool){
         return toolService.createTool(tool);
     }
     
@@ -100,9 +106,6 @@ public class ToolController {
     public Tool modifyTool(Tool tool){
         return toolService.createTool(tool);
     }
-    
-
-    
 
 
 

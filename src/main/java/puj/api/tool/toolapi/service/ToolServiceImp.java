@@ -2,6 +2,7 @@ package puj.api.tool.toolapi.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,19 +61,19 @@ public class ToolServiceImp implements ToolService{
     
     /** 
      * Metodo para crear una herramienta a traves del repositorio jpa toolRepository
-     * @param tool
+     * @param newtool
      * @return Retorna un objeto de tipo herramienta ya mapeado
      */
     @Override
     public Tool createTool(Tool tool) {
         Tool newtool = new Tool();
-        tool.setName(tool.getName());
-        tool.setImage(tool.getImage());
-        tool.setDescription(tool.getDescription());
-        tool.setBrand(tool.getBrand());
-        tool.setAmount(tool.getAmount());
-        tool.setCities(tool.getCities());
-        tool.setPrice(tool.getPrice());
+        newtool.setImage(tool.getImage());
+        newtool.setName(tool.getName());
+        newtool.setDescription(tool.getDescription());
+        //newtool.setBrand(tool.getBrand());
+        newtool.setPrice(tool.getPrice());
+        //newtool.setCities(tool.getCities());
+        newtool.setAmount(tool.getAmount());
         toolRepository.save(newtool);
         return newtool;
     }

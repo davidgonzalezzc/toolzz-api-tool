@@ -5,7 +5,9 @@ import java.util.List;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Clase para mapear la entidad Ciudad
@@ -14,6 +16,8 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="city")
+@AllArgsConstructor
+@NoArgsConstructor
 public class City implements Serializable{
 
     @Id
@@ -22,7 +26,7 @@ public class City implements Serializable{
     private String name;
 
     @ManyToMany(mappedBy = "cities")
-    private List<Tool> availability;
+    private List<Tool> tools;
 
     
 
