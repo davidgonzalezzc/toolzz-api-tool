@@ -1,6 +1,10 @@
 package puj.api.tool.toolapi.service;
 
 import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import puj.api.tool.toolapi.entity.Tool;
 
 /*
@@ -15,5 +19,5 @@ public interface ToolService {
     public Tool findToolById(Integer id);
     public List<Tool> findByBrand(Integer brand_id);
     public Tool modifyTool(Tool tool);
-
+    public Page<Tool> paginas(Pageable pageable);
 }

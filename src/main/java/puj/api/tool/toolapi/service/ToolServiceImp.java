@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import puj.api.tool.toolapi.entity.Tool;
@@ -125,6 +127,12 @@ public class ToolServiceImp implements ToolService{
     List<Tool> tools = new ArrayList<Tool>();
     tools = toolRepository.findByBrand(brand_id);
     return tools;    
+    }
+
+
+    @Override
+    public Page<Tool> paginas(Pageable pageable) {
+        return toolRepository.findAll(pageable);
     }
     
 

@@ -4,7 +4,11 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +48,20 @@ public class ToolController {
         log.info(toolService.listTools().toString());
         return toolService.listTools();
     }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/searchPaginated")
+    public ResponseEntity<Page<Tool>> paginas(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "10") int size,
+        @RequestParam(defaultValue = "id") String order,
+        @RequestParam(defaultValue = "true") boolean asc
+        ){
+            Page<Tool> tools = toolService.paginas(PageRequest.of(page,size,Sort.by(order)));
+            if(!asc)
+                tools = toolService.paginas(PageRequest.of(page,size,Sort.by(order).descending()));
+            return new ResponseEntity<Page<Tool>>(tools,HttpStatus.OK);
+        }
 
     /**
      * Metodo que encuentra una herramienta segun su nombre
