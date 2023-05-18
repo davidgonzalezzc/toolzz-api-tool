@@ -24,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 import puj.api.tool.toolapi.entity.Tool;
 import puj.api.tool.toolapi.service.ToolService;
 
+
 /**
  * Clase controlador para manejar las peticiones http
  *  @Slf4j Logger de Lombok
@@ -32,7 +33,6 @@ import puj.api.tool.toolapi.service.ToolService;
 @RestController
 @RequestMapping("/tools")
 //@CrossOrigin(origins="http://localhost:4200")
-@Slf4j
 public class ToolController {
     
     @Autowired
@@ -45,7 +45,6 @@ public class ToolController {
     @GetMapping("/tool")
     @CrossOrigin(origins = "http://localhost:4200")
     public List<Tool> listTools(){
-        log.info(toolService.listTools().toString());
         return toolService.listTools();
     }
 

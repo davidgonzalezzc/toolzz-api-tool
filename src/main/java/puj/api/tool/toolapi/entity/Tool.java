@@ -25,11 +25,13 @@ public class Tool implements Serializable{
     private String name;
     private String description;
     
+    
     @ManyToOne
-    @JoinColumn(name="brand_id")
     private Brand brand;
 
     private Double price;
+
+    
 
     @ManyToMany
     private List<City> cities;

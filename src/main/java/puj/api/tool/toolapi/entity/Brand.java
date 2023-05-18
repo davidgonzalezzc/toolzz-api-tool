@@ -1,6 +1,7 @@
 package puj.api.tool.toolapi.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -23,4 +24,8 @@ public class Brand implements Serializable{
     private Integer brand_id;
     
     private String name;
+
+
+    @OneToMany(fetch = FetchType.LAZY)
+    List<Tool> tools;
 }
