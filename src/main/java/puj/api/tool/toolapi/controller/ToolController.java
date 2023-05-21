@@ -49,7 +49,7 @@ public class ToolController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/searchPaginated")
+    @GetMapping(value="/searchPaginated",params={"page","size","order","asc"})
     public ResponseEntity<Page<Tool>> paginas(
         @RequestParam(defaultValue = "0") int page,
         @RequestParam(defaultValue = "10") int size,
