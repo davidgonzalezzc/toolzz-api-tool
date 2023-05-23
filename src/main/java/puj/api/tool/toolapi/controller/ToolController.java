@@ -9,7 +9,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,19 +19,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.extern.slf4j.Slf4j;
 import puj.api.tool.toolapi.entity.Tool;
 import puj.api.tool.toolapi.service.ToolService;
 
 
 /**
  * Clase controlador para manejar las peticiones http
- *  @Slf4j Logger de Lombok
- *  @CrossOrigin Anotación para permitir solicitudes de las url especificadas
+ *  
+ *  
  */
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/tools")
-//@CrossOrigin(origins="http://localhost:4200")
+@RequestMapping("/api")
 public class ToolController {
     
     @Autowired
@@ -42,13 +40,19 @@ public class ToolController {
      * Metodo que trae la lista de herramientas del servicio
      * @return Retorna una lista de herramientas
      */
-    @GetMapping("/tool")
-    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/list")
     public List<Tool> listTools(){
         return toolService.listTools();
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    /**
+     * Método que trae herramientas segun los párametros siguientes
+     * @param page número de página
+     * @param size tamaño de página
+     * @param order ordenado por..
+     * @param asc true - ordenado de manera ascendente
+     * @return
+     */
     @GetMapping(value="/searchPaginated",params={"page","size","order","asc"})
     public ResponseEntity<Page<Tool>> paginas(
         @RequestParam(defaultValue = "0") int page,
@@ -62,12 +66,13 @@ public class ToolController {
             return new ResponseEntity<Page<Tool>>(tools,HttpStatus.OK);
         }
 
+
     /**
-     * Metodo que encuentra una herramienta segun su nombre
+     * Método que encuentra una herramienta según su nombre
      * @param name nombre de la herramienta
-     * @return retorna una lista de herramientas que tengan el nombre que viene por parametro
+     * @return retorna una lista de herramientas que tengan el nombre que viene por párametro
      */
-    @GetMapping("/tool/byname/{name}")
+    @GetMapping("/listByName/{name}")
     public List<Tool> findToolByName(@PathVariable String name){
         return toolService.findToolByName(name);
     }
@@ -77,9 +82,6 @@ public class ToolController {
      * @param id parametro de id de la herramienta
      * @return Retorna una herramienta segun el id proporcionado
      */
-
-
-
     @GetMapping("/tool/byid/{id}")
     public Tool findToolById(@PathVariable Integer id){
         return toolService.findToolById(id);
@@ -90,6 +92,7 @@ public class ToolController {
      * @param tool parametro de herramienta a crear
      * @return Retorna la herramienta creada
      */
+    
     @PostMapping("/tool")
     public Tool createTool(@RequestBody Tool tool){
         return toolService.createTool(tool);

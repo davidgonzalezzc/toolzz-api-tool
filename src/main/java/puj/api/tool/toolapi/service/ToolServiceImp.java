@@ -72,9 +72,9 @@ public class ToolServiceImp implements ToolService{
         newtool.setImage(tool.getImage());
         newtool.setName(tool.getName());
         newtool.setDescription(tool.getDescription());
-        //newtool.setBrand(tool.getBrand());
+        newtool.setBrand(tool.getBrand());
         newtool.setPrice(tool.getPrice());
-        //newtool.setCities(tool.getCities());
+        newtool.setCities(tool.getCities());
         newtool.setAmount(tool.getAmount());
         toolRepository.save(newtool);
         return newtool;
