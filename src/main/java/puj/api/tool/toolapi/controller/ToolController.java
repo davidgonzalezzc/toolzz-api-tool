@@ -72,6 +72,7 @@ public class ToolController {
      * @param name nombre de la herramienta
      * @return retorna una lista de herramientas que tengan el nombre que viene por párametro
      */
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/listByName/{name}")
     public List<Tool> findToolByName(@PathVariable String name){
         return toolService.findToolByName(name);
