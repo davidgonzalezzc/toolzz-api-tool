@@ -28,4 +28,9 @@ public class Brand implements Serializable{
 
     @OneToMany(fetch = FetchType.LAZY)
     List<Tool> tools;
+
+    public Brand(Integer brand_id,String name){
+        this.brand_id = brand_id;
+        this.name = name;
+    }
 }

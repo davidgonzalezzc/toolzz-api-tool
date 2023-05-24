@@ -28,6 +28,10 @@ public class City implements Serializable{
     @ManyToMany(mappedBy = "cities")
     private List<Tool> tools;
 
+    public City(Integer id,String name){
+        this.id = id;
+        this.name = name;
+    }
     
 
 }
